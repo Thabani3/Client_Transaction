@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="easygames_assessment1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientID" />
+    </Key>
+    <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ClientBalance" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__Clien__29572725" FromRole="Client" ToRole="Transaction" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="TransactionID" />
+    </Key>
+    <Property Name="TransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TransactionTypeID" Type="Int32" />
+    <Property Name="ClientID" Type="Int32" />
+    <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Transacti__Clien__29572725" FromRole="Transaction" ToRole="Client" />
+    <NavigationProperty Name="TransactionType" Relationship="Self.FK__Transacti__Trans__286302EC" FromRole="Transaction" ToRole="TransactionType" />
+  </EntityType>
+  <EntityType Name="TransactionType">
+    <Key>
+      <PropertyRef Name="TransactionTypeID" />
+    </Key>
+    <Property Name="TransactionTypeID" Type="Int32" Nullable="false" />
+    <Property Name="TransactionTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__Trans__286302EC" FromRole="TransactionType" ToRole="Transaction" />
+  </EntityType>
+  <Association Name="FK__Transacti__Clien__29572725">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__Trans__286302EC">
+    <End Role="TransactionType" Type="Self.TransactionType" Multiplicity="0..1" />
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionType">
+        <PropertyRef Name="TransactionTypeID" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="TransactionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="easygames_assessment1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+    <EntitySet Name="TransactionTypes" EntityType="Self.TransactionType" />
+    <AssociationSet Name="FK__Transacti__Clien__29572725" Association="Self.FK__Transacti__Clien__29572725">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__Trans__286302EC" Association="Self.FK__Transacti__Trans__286302EC">
+      <End Role="TransactionType" EntitySet="TransactionTypes" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

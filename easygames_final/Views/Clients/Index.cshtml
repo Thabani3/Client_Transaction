@@ -1,0 +1,58 @@
+﻿@model IEnumerable<easygames_final.Models.Client>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Client List</h2>
+
+<!-- Search Form -->
+@using (Html.BeginForm("Index", "Clients", FormMethod.Get))
+{
+    <p>
+        Name: @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Search by name" })
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientBalance)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientBalance)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ClientID }, new { @class = "btn btn-warning btn-sm" })
+                    @Html.ActionLink("Details", "Details", new { id = item.ClientID }, new { @class = "btn btn-info btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ClientID }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

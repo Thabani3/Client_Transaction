@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="easygames_assessment1ModelStoreContainer" CdmEntityContainer="easygames_assessment1Entities">
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="easygames_assessment1Model.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="ClientBalance" ColumnName="ClientBalance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="easygames_assessment1Model.Transaction">
+        <MappingFragment StoreEntitySet="Transaction">
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionTypes">
+      <EntityTypeMapping TypeName="easygames_assessment1Model.TransactionType">
+        <MappingFragment StoreEntitySet="TransactionType">
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="TransactionTypeName" ColumnName="TransactionTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
